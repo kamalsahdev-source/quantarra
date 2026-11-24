@@ -460,6 +460,17 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
   .cap-card:hover,.fw-card:hover,.fw-strip-badge:hover,.shot:hover .shot-frame,.shot:focus-within .shot-frame{transform:none}
 }
 
+/* Immersive: animated evidence flow dots */
+.flow-dot{pointer-events:none}
+.flow-dot-in{fill:var(--green)}
+.flow-dot-out{fill:var(--green-deep)}
+:root[data-theme="dark"] .flow-dot-out{fill:#8fd4b4}
+:root[data-palette="ocean"] .flow-dot-out{fill:#082F49}
+:root[data-palette="ocean"][data-theme="dark"] .flow-dot-out{fill:#7DD3FC}
+:root[data-palette="burgundy"] .flow-dot-out{fill:#450A0A}
+:root[data-palette="burgundy"][data-theme="dark"] .flow-dot-out{fill:#E5C29A}
+@media(prefers-reduced-motion:reduce){.flow-dots{display:none}}
+
 /* Palette switcher (header, next to the theme toggle) */
 .palette-wrap{position:relative;flex:none}
 .palette-toggle .palette-chevron{width:14px;height:14px;transition:transform .18s ease}
@@ -769,8 +780,8 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
       <div class="metrics-grid reveal">
         <div class="metric"><span class="metric-value" data-count="150" data-suffix="+">150+</span><span class="metric-label">Compliance frameworks supported</span></div>
         <div class="metric"><span class="metric-value" data-count="80" data-suffix="%">80%</span><span class="metric-label">Reduction in manual effort</span></div>
-        <div class="metric"><span class="metric-value">24/7</span><span class="metric-label">Live compliance monitoring</span></div>
         <div class="metric"><span class="metric-value" data-count="60" data-suffix="%">60%</span><span class="metric-label">Faster time to certification</span></div>
+        <div class="metric"><span class="metric-value">24/7</span><span class="metric-label">Live monitoring</span></div>
       </div>
     </div>
   </section>
@@ -789,7 +800,7 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
                   <span class="kicker" style="margin-bottom:8px">Inside the platform</span>
                   <h3>Evidence flows in. Proof flows out.</h3>
                 </div>
-                <p>150+ integrations pull evidence from where it already lives, Quantarra verifies and links it to controls, and auditors get a clean, organized pack, no spreadsheet chase. The center names the capabilities that do the work.</p>
+                <p><span data-count="150" data-suffix="+">150+</span> integrations pull evidence from where it already lives, Quantarra verifies and links it to controls, and auditors get a clean, organized pack, no spreadsheet chase. The center names the capabilities that do the work.</p>
               </div>
               <div class="flow-svg-wrap">
                 <svg viewBox="0 0 1080 560" width="100%" role="img" aria-label="Diagram showing evidence flowing in from the firm's systems and vendors, cloud and SaaS apps, identity and access, tickets and documents, vendors and third parties, and manual uploads, into Quantarra, where evidence capture, AI verification, framework mapping, the audit ledger, and the exam room turn it into proof that flows out to auditors, examiners, and customers.">
@@ -799,14 +810,27 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
                     <marker id="arrowGreen" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#3fa67a"/></marker>
                     <marker id="arrowPale" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c6dfd0"/></marker>
                   </defs>
-                  <path class="flow-line" d="M246 113 C 310 113, 340 168, 406 186" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
-                  <path class="flow-line" d="M246 197 C 310 197, 340 238, 406 256" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
-                  <path class="flow-line" d="M246 281 C 310 281, 340 308, 406 326" fill="none" stroke="#3fa67a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-                  <path class="flow-line" d="M246 365 C 310 365, 340 378, 406 396" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowPale)"/>
-                  <path class="flow-line" d="M246 449 C 310 449, 340 452, 406 466" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowPale)"/>
-                  <path class="flow-line" d="M706 240 C 762 240, 778 148, 834 140" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
-                  <path class="flow-line" d="M706 326 C 762 326, 778 292, 834 292" fill="none" stroke="#3fa67a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
-                  <path class="flow-line" d="M706 412 C 762 412, 778 436, 834 444" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path id="flowIn1" class="flow-line" d="M246 113 C 310 113, 340 168, 406 186" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path id="flowIn2" class="flow-line" d="M246 197 C 310 197, 340 238, 406 256" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path id="flowIn3" class="flow-line" d="M246 281 C 310 281, 340 308, 406 326" fill="none" stroke="#3fa67a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+                  <path id="flowIn4" class="flow-line" d="M246 365 C 310 365, 340 378, 406 396" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowPale)"/>
+                  <path id="flowIn5" class="flow-line" d="M246 449 C 310 449, 340 452, 406 466" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowPale)"/>
+                  <path id="flowOut1" class="flow-line" d="M706 240 C 762 240, 778 148, 834 140" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path id="flowOut2" class="flow-line" d="M706 326 C 762 326, 778 292, 834 292" fill="none" stroke="#3fa67a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+                  <path id="flowOut3" class="flow-line" d="M706 412 C 762 412, 778 436, 834 444" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <g class="flow-dots" aria-hidden="true">
+                    <circle class="flow-dot flow-dot-in" r="5"><animateMotion dur="2.6s" repeatCount="indefinite"><mpath href="#flowIn1"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-in" r="4" opacity=".75"><animateMotion dur="2.6s" begin="1.3s" repeatCount="indefinite"><mpath href="#flowIn1"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-in" r="5"><animateMotion dur="2.9s" begin="0.4s" repeatCount="indefinite"><mpath href="#flowIn2"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-in" r="5.5"><animateMotion dur="2.4s" begin="0.2s" repeatCount="indefinite"><mpath href="#flowIn3"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-in" r="4" opacity=".75"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#flowIn3"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-in" r="5"><animateMotion dur="3s" begin="0.7s" repeatCount="indefinite"><mpath href="#flowIn4"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-in" r="5"><animateMotion dur="3.1s" begin="1s" repeatCount="indefinite"><mpath href="#flowIn5"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-out" r="5"><animateMotion dur="2.7s" begin="0.3s" repeatCount="indefinite"><mpath href="#flowOut1"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-out" r="5.5"><animateMotion dur="2.5s" begin="0.6s" repeatCount="indefinite"><mpath href="#flowOut2"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-out" r="4" opacity=".75"><animateMotion dur="2.5s" begin="1.7s" repeatCount="indefinite"><mpath href="#flowOut2"/></animateMotion></circle>
+                    <circle class="flow-dot flow-dot-out" r="5"><animateMotion dur="2.8s" begin="0.9s" repeatCount="indefinite"><mpath href="#flowOut3"/></animateMotion></circle>
+                  </g>
                   <g font-family="Manrope, sans-serif">
                     <text x="14" y="42" font-size="12.5" font-weight="800" letter-spacing="1.2" fill="#2c8560">THE FIRM&rsquo;S SYSTEMS &amp; VENDORS</text>
                     <text x="326" y="42" text-anchor="middle" font-size="14" font-weight="800" letter-spacing="1.5" fill="#2c8560">EVIDENCE IN</text>
@@ -834,7 +858,7 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
                   <text x="556" y="138" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12.5" fill="#d6eee1">controls, and evidence</text>
                   <g font-family="Manrope, sans-serif">
                     <rect x="424" y="156" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
-                    <text x="442" y="182" font-size="15.5" font-weight="800" fill="#ffffff">Evidence capture</text><text x="442" y="203" font-size="12.5" fill="#d6eee1">350+ integrations collect &amp; seal it</text>
+                    <text x="442" y="182" font-size="15.5" font-weight="800" fill="#ffffff">Evidence capture</text><text x="442" y="203" font-size="12.5" fill="#d6eee1"><tspan data-count="350" data-suffix="+">350+</tspan> integrations collect &amp; seal it</text>
                     <rect x="424" y="226" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
                     <text x="442" y="252" font-size="15.5" font-weight="800" fill="#ffffff">AI verification</text><text x="442" y="273" font-size="12.5" fill="#d6eee1">AI checks it; a human decides</text>
                     <rect x="424" y="296" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
@@ -867,7 +891,7 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
               <article class="cap-card">
                 <span class="cap-ic"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg></span>
                 <h3><span class="cap-num" aria-hidden="true">1</span>Evidence automation</h3>
-                <p>350+ integrations auto-collect, hash-seal, and organize evidence in real time, mapped to SOC 2 Trust Services Criteria and ISO 27001 Annex A controls. No screenshots, no spreadsheets.</p>
+                <p><span data-count="350" data-suffix="+">350+</span> integrations auto-collect, hash-seal, and organize evidence in real time, mapped to SOC 2 Trust Services Criteria and ISO 27001 Annex A controls. No screenshots, no spreadsheets.</p>
               </article>
               <article class="cap-card">
                 <span class="cap-ic"><svg viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></svg></span>
@@ -1375,18 +1399,23 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
     }
     requestAnimationFrame(step);
   }
-  var metricsGrid = document.querySelector('.metrics-grid');
-  if (metricsGrid && !reduceMotion && 'IntersectionObserver' in window) {
-    var metricsIO = new IntersectionObserver(function(entries){
+  // Count up every number with data-count when it scrolls into view:
+  // the headline metrics (150+, 350+, 80%, 60%) and the matching figures
+  // in the platform copy. Each element animates once.
+  var countEls = document.querySelectorAll('[data-count]');
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    var countIO = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
-        if (en.isIntersecting) {
-          document.querySelectorAll('.metric-value[data-count]').forEach(countUp);
-          metricsIO.disconnect();
-        }
+        if (en.isIntersecting) { countUp(en.target); countIO.unobserve(en.target); }
       });
     }, { threshold: 0.35 });
-    metricsIO.observe(metricsGrid);
+    countEls.forEach(function(el){ countIO.observe(el); });
+  } else {
+    countEls.forEach(function(el){
+      el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || '');
+    });
   }
+
 })();
 </script>
 </body>
