@@ -83,6 +83,18 @@ button,[role="button"],select,summary,input:not([type=checkbox],[type=radio]){mi
 :root[data-theme="dark"] .label-light{display:inline}
 :root[data-theme="dark"] .label-dark{display:none}
 .label-light{display:none}
+.lang-wrap{position:relative;flex:none}
+.lang-toggle .lang-chevron{width:14px;height:14px;transition:transform .18s ease}
+.lang-toggle[aria-expanded="true"] .lang-chevron{transform:rotate(180deg)}
+@media(max-width:1280px){.lang-toggle .lang-code{display:none}.lang-toggle{padding:0 12px}}
+.lang-menu{position:absolute;top:calc(100% + 8px);right:0;min-width:216px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:6px;display:none;z-index:60}
+.lang-menu.open{display:block}
+.lang-menu-label{display:block;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--body);padding:8px 12px 6px}
+.lang-option{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:transparent;border-radius:9px;font-family:var(--font-body);font-size:.95rem;font-weight:600;color:var(--body-strong);cursor:pointer;text-align:left;min-height:44px}
+.lang-option:hover{background:var(--mint);color:var(--ink)}
+.lang-option .lang-check{width:18px;height:18px;flex:none;stroke:var(--green-strong);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.lang-option .lang-current{margin-left:auto;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green-strong);background:var(--mint);border:1px solid var(--line-soft);border-radius:999px;padding:3px 8px}
+@media(max-width:760px){.lang-toggle .lang-code{display:none}}
 .nav-toggle{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:9px;width:46px;height:46px;cursor:pointer;align-items:center;justify-content:center}
 .nav-toggle svg{width:22px;height:22px;stroke:var(--ink)}
 .mobile-menu{display:none;border-top:1px solid var(--line-soft);padding:12px 24px 20px;background:var(--bg)}
@@ -100,6 +112,7 @@ button,[role="button"],select,summary,input:not([type=checkbox],[type=radio]){mi
 .hero h1 .grow{color:var(--green)}
 .hero .subhead{color:#ffffff;font-size:clamp(1.12rem,2.2vw,1.38rem);line-height:1.55;max-width:46rem;margin:0 auto 36px;font-weight:500}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:64px}
+.hero-industries{font-size:.92rem;font-weight:600;letter-spacing:.02em;color:rgba(255,255,255,.62);margin:-40px auto 56px;line-height:1.5}
 .hero-visual{max-width:920px;margin:0 auto;position:relative;z-index:0}
 .hero-visual::before{content:"";position:absolute;inset:-52px -32px -12px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 62% 58% at 50% 44%,rgba(76,189,141,.30),rgba(63,166,122,.10) 55%,transparent 72%);filter:blur(6px)}
 .dash{background:var(--surface);border:1px solid var(--line);border-radius:18px 18px 0 0;border-bottom:none;box-shadow:0 -10px 60px rgba(0,0,0,.35);overflow:hidden;text-align:left;color:var(--body)}
@@ -189,9 +202,9 @@ button,[role="button"],select,summary,input:not([type=checkbox],[type=radio]){mi
 .fw-chips span{font-size:.72rem;font-weight:800;letter-spacing:.04em;background:var(--mint-2);color:var(--green-ink);border-radius:999px;padding:4px 10px;line-height:1.4}
 :root[data-theme="dark"] .fw-chips span{color:#8fd4b4}
 
-/* Platform visual — "Inside the platform": evidence flows in, proof flows out.
-   The six capability cards sit directly under this visual, numbered to match
-   the markers in the diagram. */
+/* Platform visual — "Inside the platform": evidence flows in from the firm's
+   systems and vendors, the center names the five core capabilities, and proof
+   flows out to auditors, examiners, and customers. */
 .shots-sec{background:var(--bg)}
 .platform-visual{margin:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--surface);line-height:1.5}
 .flow-head{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:baseline;justify-content:space-between;padding:26px 28px 6px;background:var(--surface)}
@@ -210,6 +223,66 @@ button,[role="button"],select,summary,input:not([type=checkbox],[type=radio]){mi
   .flow-svg-wrap{padding:6px 8px}
   .flow-legend .flow-note{margin-left:0}
 }
+/* Platform screenshots — simulated product views, slanted in a single row */
+.shots-sec{background:var(--bg);overflow:hidden}
+.shots-row{display:flex;flex-wrap:nowrap;justify-content:center;align-items:flex-start;gap:0;perspective:1050px;perspective-origin:50% 40%;padding:22px 6px 10px;margin:0 -8px}
+.shot{flex:1 1 0;min-width:0;display:flex;flex-direction:column;transform-style:preserve-3d;position:relative}
+.shot+.shot{margin-left:-52px}
+.shot:nth-child(1){z-index:1}.shot:nth-child(2){z-index:2}.shot:nth-child(3){z-index:3}.shot:nth-child(4){z-index:4}.shot:nth-child(5){z-index:5}
+.shot-frame{background:var(--surface);border:1px solid rgba(11,36,26,.22);border-radius:8px;overflow:hidden;box-shadow:-26px 30px 54px rgba(11,36,26,.32),-6px 8px 18px rgba(11,36,26,.18);transform:rotateY(-40deg) rotateX(4deg);transform-origin:center center;transition:transform .35s ease,box-shadow .35s ease}
+.shot:hover,.shot:focus-within{z-index:20}
+.shot:hover .shot-frame,.shot:focus-within .shot-frame{transform:rotateY(0deg) rotateX(0deg) translateZ(46px) scale(1.04);box-shadow:0 28px 56px rgba(11,36,26,.30)}
+.shot-bar{display:flex;align-items:center;gap:5px;padding:7px 9px;background:var(--mint);border-bottom:1px solid var(--line)}
+.shot+.shot .shot-cap{padding-left:54px}
+.shot-bar .d{width:7px;height:7px;border-radius:50%;flex:none}
+.shot-bar .url{margin-left:4px;font-size:.60rem;font-weight:700;color:var(--body);background:var(--surface);border:1px solid var(--line-soft);border-radius:4px;padding:2px 7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shot-body{padding:0;min-height:228px;display:flex;flex-direction:column;gap:8px;background:linear-gradient(90deg,var(--mint) 0 30px,transparent 30px);padding:12px 10px 13px 40px;position:relative}
+.shot-body::before{content:"";position:absolute;left:9px;top:14px;width:12px;height:12px;border-radius:3px;background:var(--green);box-shadow:0 20px 0 var(--mint-2),0 40px 0 var(--mint-2),0 60px 0 var(--mint-2),0 80px 0 var(--mint-2)}
+.shot-kicker{font-size:.62rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--green-strong)}
+.shot-title{font-family:var(--font-display);font-weight:700;font-size:.82rem;color:var(--ink);line-height:1.25}
+.shot-line{display:flex;align-items:center;gap:7px;font-size:.72rem;line-height:1.35;color:var(--body-strong)}
+.shot-line .dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex:none}
+.shot-line .muted{color:var(--body);margin-left:auto;font-size:.66rem;white-space:nowrap}
+.mini-pill{font-size:.6rem;font-weight:800;padding:2px 7px;border-radius:999px;white-space:nowrap;margin-left:auto}
+.mini-pill.ok{background:#e1f2e8;color:#1c6b47}.mini-pill.info{background:#e5edfc;color:#2c4f9e}.mini-pill.warn{background:#fdf0da;color:#8a5a12}
+:root[data-theme="dark"] .mini-pill.ok{background:#173526;color:#7fd3ab}:root[data-theme="dark"] .mini-pill.info{background:#1b2a4a;color:#9db9f2}:root[data-theme="dark"] .mini-pill.warn{background:#3a2c12;color:#eec27a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mini-pill.ok{background:#173526;color:#7fd3ab}:root:not([data-theme="light"]) .mini-pill.info{background:#1b2a4a;color:#9db9f2}:root:not([data-theme="light"]) .mini-pill.warn{background:#3a2c12;color:#eec27a}}
+.shot-bar-track{height:6px;border-radius:99px;background:var(--mint-2);overflow:hidden}
+.shot-bar-track i{display:block;height:100%;background:var(--green);border-radius:99px}
+.shot-meta{display:flex;justify-content:space-between;font-size:.66rem;font-weight:700;color:var(--body-strong)}
+.shot-tags{display:flex;flex-wrap:wrap;gap:4px}
+.shot-tags span{font-size:.6rem;font-weight:800;background:var(--mint);border:1px solid var(--line-soft);color:var(--green-ink);border-radius:999px;padding:2px 6px}
+:root[data-theme="dark"] .shot-tags span{color:#8fd4b4}
+.shot-file{display:flex;align-items:center;gap:7px;background:var(--mint);border-radius:8px;padding:7px 8px;font-size:.68rem;font-weight:700;color:var(--body-strong)}
+.shot-file svg{width:14px;height:14px;stroke:var(--green-strong);fill:none;stroke-width:1.8;flex:none}
+.shot-btn{margin-top:auto;background:var(--green);color:#fff;text-align:center;font-size:.7rem;font-weight:800;border-radius:7px;padding:7px 8px}
+.shot-score{display:flex;align-items:center;gap:10px}
+.shot-score .big{font-family:var(--font-display);font-size:1.7rem;font-weight:800;color:var(--ink);line-height:1}
+.shot-score .big span{font-size:.95rem;color:var(--green-strong)}
+.shot-cap{padding:20px 10px 0 2px;text-align:left;max-width:92%}
+.shot-cap h3{font-size:.95rem;margin-bottom:4px}
+.shot-cap p{font-size:.84rem;line-height:1.5}
+.shots-note{margin-top:26px;font-size:.86rem;color:var(--body);text-align:center}
+@media(max-width:1100px){
+  .shot+.shot{margin-left:-38px}
+  .shot-frame{transform:rotateY(-34deg) rotateX(4deg)}
+  .shot+.shot .shot-cap{padding-left:40px}
+  .shot-body{min-height:214px}
+}
+@media(max-width:820px){
+  .shots-row{flex-wrap:wrap;gap:28px 0;perspective:none;padding:6px 0 0;margin:0}
+  .shot{flex:1 1 46%;min-width:250px}
+  .shot+.shot{margin-left:0}
+  .shot-frame{transform:none}
+  .shot:hover .shot-frame,.shot:focus-within .shot-frame{transform:none}
+  .shot-cap,.shot+.shot .shot-cap{max-width:100%;padding-left:2px}
+}
+@media(max-width:520px){
+  .shots-row{flex-direction:column;gap:30px}
+  .shot{flex:1 1 auto;width:100%;min-width:0}
+  .shot-body{min-height:0}
+}
+
 /* Proof chain */
 .chain-hint{font-size:.92rem;font-weight:600;color:var(--body);margin:-26px 0 16px}
 .chain{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
@@ -303,6 +376,18 @@ button,[role="button"],select,summary,input:not([type=checkbox],[type=radio]){mi
 html.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 html.js .reveal.in{opacity:1;transform:none}
 
+/* Demo video placeholder — visibly a placeholder, not a player or form */
+.demo-video-sec{padding:0 0 88px;background:var(--bg)}
+.demo-video-placeholder{border:2px dashed var(--green-strong);border-radius:18px;background:var(--mint);padding:40px 36px;text-align:center}
+.demo-video-badge{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green-strong);background:var(--surface);border:1.5px dashed var(--green-strong);border-radius:999px;padding:6px 14px;margin-bottom:18px}
+.demo-video-placeholder h2{font-size:clamp(1.7rem,3.2vw,2.3rem);margin-bottom:12px}
+.demo-video-placeholder p{max-width:38rem;margin:0 auto}
+.demo-video-box{margin:28px auto 20px;max-width:640px;aspect-ratio:16/9;border:2px dashed var(--line);border-radius:12px;background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--body);padding:24px}
+.demo-video-box svg{width:44px;height:44px;stroke:var(--body);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.7}
+.demo-video-box span{font-size:.9rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.demo-video-note{font-size:.92rem;font-weight:600;color:var(--body-strong)}
+@media(max-width:760px){.demo-video-sec{padding-bottom:60px}.demo-video-placeholder{padding:32px 20px}}
+
 /* Placeholder sections (Industries / Blog / About / Contact) */
 .placeholder-sec{padding:56px 0;border-top:1px dashed var(--line)}
 .placeholder-sec.alt{background:var(--mint)}
@@ -378,6 +463,41 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
         <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <span class="theme-label label-dark">Dark</span><span class="theme-label label-light">Light</span>
       </button>
+      <div class="lang-wrap">
+        <button class="theme-toggle lang-toggle" id="langToggle" type="button" aria-label="Select language, current language is English" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.6 3.9 5.7 3.9 9s-1.4 6.4-3.9 9c-2.5-2.6-3.9-5.7-3.9-9S9.5 5.6 12 3z"/></svg>
+          <span class="lang-code">EN</span>
+          <svg class="lang-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu" aria-label="Language">
+          <span class="lang-menu-label">Language</span>
+          <button class="lang-option" type="button" role="menuitemradio" aria-checked="true">
+            <svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            <span>English</span>
+            <span class="lang-current">Current</span>
+          </button>
+          <button class="lang-option" type="button" role="menuitemradio" aria-checked="false" lang="es">
+            <span aria-hidden="true" style="width:18px;height:18px;flex:none"></span>
+            <span>Español</span>
+          </button>
+          <button class="lang-option" type="button" role="menuitemradio" aria-checked="false" lang="fr">
+            <span aria-hidden="true" style="width:18px;height:18px;flex:none"></span>
+            <span>Français</span>
+          </button>
+          <button class="lang-option" type="button" role="menuitemradio" aria-checked="false" lang="nl">
+            <span aria-hidden="true" style="width:18px;height:18px;flex:none"></span>
+            <span>Nederlands</span>
+          </button>
+          <button class="lang-option" type="button" role="menuitemradio" aria-checked="false" lang="pt">
+            <span aria-hidden="true" style="width:18px;height:18px;flex:none"></span>
+            <span>Português</span>
+          </button>
+          <button class="lang-option" type="button" role="menuitemradio" aria-checked="false" lang="hi">
+            <span aria-hidden="true" style="width:18px;height:18px;flex:none"></span>
+            <span>हिन्दी</span>
+          </button>
+        </div>
+      </div>
       <a class="btn btn-primary" style="padding:11px 22px;min-height:46px" href="#demo">Book a demo</a>
     </div>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
@@ -406,6 +526,7 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
           <a class="btn btn-primary" href="#demo">Book a demo</a>
           <a class="btn btn-outline" href="#capabilities">See the platform</a>
         </div>
+        <p class="hero-industries">Serving Financial Services &middot; Healthcare &middot; Telecom &middot; SaaS &middot; Logistics</p>
       </div>
       <div class="hero-visual">
         <div class="dash" role="img" aria-label="Illustration of the Quantarra dashboard showing audit readiness by framework and control health">
@@ -503,50 +624,70 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
                   <span class="kicker" style="margin-bottom:8px">Inside the platform</span>
                   <h3>Evidence flows in. Proof flows out.</h3>
                 </div>
-                <p>150+ integrations pull evidence from where it already lives, Quantarra verifies and links it to controls, and auditors get a clean, organized pack — no spreadsheet chase. Follow the numbers: each numbered part of the flow is one of the six capabilities below.</p>
+                <p>150+ integrations pull evidence from where it already lives, Quantarra verifies and links it to controls, and auditors get a clean, organized pack — no spreadsheet chase. The center names the five capabilities that do the work.</p>
               </div>
               <div class="flow-svg-wrap">
-                <svg viewBox="0 0 980 300" width="100%" role="img" aria-label="Diagram showing evidence flowing from cloud apps, identity, HR and ticketing systems into Quantarra, then out as an audit-ready pack for auditors and regulators. Numbered markers 1 to 6 match the six capability cards below the diagram.">
+                <svg viewBox="0 0 1080 560" width="100%" role="img" aria-label="Diagram showing evidence flowing in from the firm's systems and vendors — cloud and SaaS apps, identity and access, tickets and documents, vendors and third parties, and manual uploads — into Quantarra, where evidence capture, AI verification, framework mapping, the audit ledger, and the exam room turn it into proof that flows out to auditors, examiners, and customers.">
                   <defs>
                     <linearGradient id="qGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3fa67a"/><stop offset="100%" stop-color="#2c8560"/></linearGradient>
+                    <marker id="arrowLight" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#a9d2ba"/></marker>
+                    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#3fa67a"/></marker>
+                    <marker id="arrowPale" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c6dfd0"/></marker>
                   </defs>
-                  <path class="flow-line" d="M210 62 C 300 62, 320 112, 390 132" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5"/>
-                  <path class="flow-line" d="M210 128 H 390" fill="none" stroke="#3fa67a" stroke-width="2.5"/>
-                  <path class="flow-line" d="M210 192 C 300 192, 320 152, 390 146" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5"/>
-                  <path class="flow-line" d="M210 248 C 300 248, 340 168, 390 158" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5"/>
-                  <path class="flow-line" d="M590 132 C 660 114, 680 82, 760 82" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5"/>
-                  <path class="flow-line" d="M590 146 H 760" fill="none" stroke="#3fa67a" stroke-width="2.5"/>
-                  <circle cx="300" cy="128" r="11" fill="#2c8560" stroke="#ffffff" stroke-width="2"/><text x="300" y="132.5" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11.5" font-weight="800" fill="#ffffff">1</text>
-                  <circle cx="675" cy="146" r="11" fill="#2c8560" stroke="#ffffff" stroke-width="2"/><text x="675" y="150.5" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11.5" font-weight="800" fill="#ffffff">6</text>
-                  <path class="flow-line" d="M590 160 C 660 176, 680 198, 760 198" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5"/>
+                  <path class="flow-line" d="M246 113 C 310 113, 340 168, 406 186" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path class="flow-line" d="M246 197 C 310 197, 340 238, 406 256" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path class="flow-line" d="M246 281 C 310 281, 340 308, 406 326" fill="none" stroke="#3fa67a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+                  <path class="flow-line" d="M246 365 C 310 365, 340 378, 406 396" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowPale)"/>
+                  <path class="flow-line" d="M246 449 C 310 449, 340 452, 406 466" fill="none" stroke="#c6dfd0" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowPale)"/>
+                  <path class="flow-line" d="M706 240 C 762 240, 778 148, 834 140" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
+                  <path class="flow-line" d="M706 326 C 762 326, 778 292, 834 292" fill="none" stroke="#3fa67a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+                  <path class="flow-line" d="M706 412 C 762 412, 778 436, 834 444" fill="none" stroke="#a9d2ba" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#arrowLight)"/>
                   <g font-family="Manrope, sans-serif">
-                    <rect x="20" y="36" width="190" height="52" rx="12" fill="#eef6f1" stroke="#dce6df"/>
-                    <text x="38" y="59" font-size="13" font-weight="800" fill="#101613">Cloud &amp; SaaS</text><text x="38" y="76" font-size="11.5" fill="#57615a">AWS · Azure · Google</text>
-                    <rect x="20" y="102" width="190" height="52" rx="12" fill="#eef6f1" stroke="#dce6df"/>
-                    <text x="38" y="125" font-size="13" font-weight="800" fill="#101613">Identity &amp; Access</text><text x="38" y="142" font-size="11.5" fill="#57615a">Okta · Entra ID · HRIS</text>
-                    <rect x="20" y="168" width="190" height="52" rx="12" fill="#eef6f1" stroke="#dce6df"/>
-                    <text x="38" y="191" font-size="13" font-weight="800" fill="#101613">Tickets &amp; Docs</text><text x="38" y="208" font-size="11.5" fill="#57615a">Jira · ServiceNow · Drive</text>
-                    <rect x="20" y="234" width="190" height="42" rx="12" fill="#ffffff" stroke="#dce6df" stroke-dasharray="4 4"/>
-                    <text x="38" y="260" font-size="12.5" font-weight="700" fill="#3c453f">+ Manual uploads &amp; tasks</text>
+                    <text x="14" y="42" font-size="12.5" font-weight="800" letter-spacing="1.2" fill="#2c8560">THE FIRM&rsquo;S SYSTEMS &amp; VENDORS</text>
+                    <text x="326" y="42" text-anchor="middle" font-size="14" font-weight="800" letter-spacing="1.5" fill="#2c8560">EVIDENCE IN</text>
+                    <text x="326" y="64" text-anchor="middle" font-size="11.5" fill="#57615a">from systems &amp; vendors</text>
+                    <text x="770" y="42" text-anchor="middle" font-size="14" font-weight="800" letter-spacing="1.5" fill="#2c8560">PROOF OUT</text>
+                    <text x="770" y="64" text-anchor="middle" font-size="11.5" fill="#57615a">to auditors, examiners</text>
+                    <text x="770" y="82" text-anchor="middle" font-size="11.5" fill="#57615a">&amp; customers</text>
+                    <text x="834" y="42" font-size="12.5" font-weight="800" letter-spacing="1.2" fill="#2c8560">PROOF, READY TO SHARE</text>
                   </g>
-                  <rect x="390" y="46" width="200" height="208" rx="18" fill="url(#qGrad)"/>
-                  <text x="490" y="84" text-anchor="middle" font-family="Sora, sans-serif" font-size="17" font-weight="800" fill="#ffffff">QUANTARRA</text>
-                  <text x="490" y="106" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11.5" fill="#d6eee1">Map · Verify · Link to controls</text>
-                  <g font-family="Manrope, sans-serif" font-size="11" font-weight="600" fill="#eaf5ee">
-                    <circle cx="416" cy="132" r="8.5" fill="rgba(255,255,255,0.28)"/><text x="416" y="136" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">2</text><text x="432" y="136">Self-service configuration</text>
-                    <circle cx="416" cy="156" r="8.5" fill="rgba(255,255,255,0.28)"/><text x="416" y="160" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">3</text><text x="432" y="160">AI checks, human decides</text>
-                    <circle cx="416" cy="180" r="8.5" fill="rgba(255,255,255,0.28)"/><text x="416" y="184" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">4</text><text x="432" y="184">Map once, reuse everywhere</text>
-                    <circle cx="416" cy="204" r="8.5" fill="rgba(255,255,255,0.28)"/><text x="416" y="208" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff">5</text><text x="432" y="208">Risks linked to controls</text>
-                  </g>
-                  <rect x="425" y="220" width="130" height="26" rx="13" fill="rgba(255,255,255,0.18)"/>
-                  <text x="490" y="237" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="800" fill="#ffffff">✓ AUDIT-READY</text>
                   <g font-family="Manrope, sans-serif">
-                    <rect x="760" y="56" width="200" height="52" rx="12" fill="#123b2a"/>
-                    <text x="778" y="79" font-size="13" font-weight="800" fill="#ffffff">Auditor pack</text><text x="778" y="96" font-size="11.5" fill="#cfe3d8">Policies · Controls · Evidence</text>
-                    <rect x="760" y="116" width="200" height="52" rx="12" fill="#123b2a"/>
-                    <text x="778" y="139" font-size="13" font-weight="800" fill="#ffffff">Examiner view</text><text x="778" y="156" font-size="11.5" fill="#cfe3d8">Secure, read-only access</text>
-                    <rect x="760" y="176" width="200" height="52" rx="12" fill="#123b2a"/>
-                    <text x="778" y="199" font-size="13" font-weight="800" fill="#ffffff">Customer trust</text><text x="778" y="216" font-size="11.5" fill="#cfe3d8">Questionnaires answered fast</text>
+                    <rect x="14" y="78" width="232" height="70" rx="12" fill="#eef6f1" stroke="#dce6df"/>
+                    <text x="32" y="108" font-size="15.5" font-weight="800" fill="#101613">Cloud &amp; SaaS apps</text><text x="32" y="131" font-size="12.5" fill="#57615a">AWS · Azure · Google Cloud</text>
+                    <rect x="14" y="162" width="232" height="70" rx="12" fill="#eef6f1" stroke="#dce6df"/>
+                    <text x="32" y="192" font-size="15.5" font-weight="800" fill="#101613">Identity &amp; access</text><text x="32" y="215" font-size="12.5" fill="#57615a">Okta · Entra ID · HRIS</text>
+                    <rect x="14" y="246" width="232" height="70" rx="12" fill="#eef6f1" stroke="#dce6df"/>
+                    <text x="32" y="276" font-size="15.5" font-weight="800" fill="#101613">Tickets &amp; docs</text><text x="32" y="299" font-size="12.5" fill="#57615a">Jira · ServiceNow · Drive</text>
+                    <rect x="14" y="330" width="232" height="70" rx="12" fill="#eef6f1" stroke="#dce6df"/>
+                    <text x="32" y="360" font-size="15.5" font-weight="800" fill="#101613">Vendors &amp; third parties</text><text x="32" y="383" font-size="12.5" fill="#57615a">Assessments · SOC 2 reports</text>
+                    <rect x="14" y="414" width="232" height="70" rx="12" fill="#ffffff" stroke="#dce6df" stroke-dasharray="4 4"/>
+                    <text x="32" y="444" font-size="15.5" font-weight="700" fill="#3c453f">Manual uploads &amp; tasks</text><text x="32" y="467" font-size="12.5" fill="#57615a">Policies · Attestations</text>
+                  </g>
+                  <rect x="406" y="48" width="300" height="496" rx="18" fill="url(#qGrad)"/>
+                  <text x="556" y="92" text-anchor="middle" font-family="Sora, sans-serif" font-size="23" font-weight="800" fill="#ffffff">QUANTARRA</text>
+                  <text x="556" y="118" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12.5" fill="#d6eee1">One centralized hub for policies, risks,</text>
+                  <text x="556" y="138" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12.5" fill="#d6eee1">controls, and evidence</text>
+                  <g font-family="Manrope, sans-serif">
+                    <rect x="424" y="156" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
+                    <text x="442" y="182" font-size="15.5" font-weight="800" fill="#ffffff">Evidence capture</text><text x="442" y="203" font-size="12.5" fill="#d6eee1">350+ integrations collect &amp; seal it</text>
+                    <rect x="424" y="226" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
+                    <text x="442" y="252" font-size="15.5" font-weight="800" fill="#ffffff">AI verification</text><text x="442" y="273" font-size="12.5" fill="#d6eee1">AI checks it; a human decides</text>
+                    <rect x="424" y="296" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
+                    <text x="442" y="322" font-size="15.5" font-weight="800" fill="#ffffff">Framework mapping</text><text x="442" y="343" font-size="12.5" fill="#d6eee1">Map once, reuse — 150+ frameworks</text>
+                    <rect x="424" y="366" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
+                    <text x="442" y="392" font-size="15.5" font-weight="800" fill="#ffffff">Audit ledger</text><text x="442" y="413" font-size="12.5" fill="#d6eee1">Sealed, timestamped, traceable</text>
+                    <rect x="424" y="436" width="264" height="60" rx="12" fill="rgba(255,255,255,0.14)"/>
+                    <text x="442" y="462" font-size="15.5" font-weight="800" fill="#ffffff">Exam room</text><text x="442" y="483" font-size="12.5" fill="#d6eee1">Read-only for auditors &amp; examiners</text>
+                  </g>
+                  <rect x="466" y="508" width="180" height="28" rx="14" fill="rgba(255,255,255,0.18)"/>
+                  <text x="556" y="526" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12.5" font-weight="800" fill="#ffffff">✓ AUDIT-READY</text>
+                  <g font-family="Manrope, sans-serif">
+                    <rect x="834" y="92" width="232" height="96" rx="12" fill="#123b2a"/>
+                    <text x="854" y="130" font-size="16" font-weight="800" fill="#ffffff">Auditors</text><text x="854" y="152" font-size="12.5" fill="#cfe3d8">Audit-ready pack</text><text x="854" y="172" font-size="12.5" fill="#cfe3d8">Policies · controls · evidence</text>
+                    <rect x="834" y="244" width="232" height="96" rx="12" fill="#123b2a"/>
+                    <text x="854" y="282" font-size="16" font-weight="800" fill="#ffffff">Examiners</text><text x="854" y="304" font-size="12.5" fill="#cfe3d8">Exam room access</text><text x="854" y="324" font-size="12.5" fill="#cfe3d8">Secure &amp; read-only</text>
+                    <rect x="834" y="396" width="232" height="96" rx="12" fill="#123b2a"/>
+                    <text x="854" y="434" font-size="16" font-weight="800" fill="#ffffff">Customers</text><text x="854" y="456" font-size="12.5" fill="#cfe3d8">Trust center</text><text x="854" y="476" font-size="12.5" fill="#cfe3d8">Questionnaires answered fast</text>
                   </g>
                 </svg>
               </div>
@@ -590,6 +731,113 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
                 <p>Read-only Auditor Portal, scoped sharing, redaction, and one-click work-paper export, packaged for SOC 2 and ISO 27001 audits and every other framework you run.</p>
               </article>
             </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM SCREENSHOTS — simulated views -->
+  <section class="shots-sec" id="platform-views" aria-label="Platform screenshots">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Inside the platform</span>
+        <h2>See the platform at work.</h2>
+        <p>Five core views in a single row, angled like screens on a desk — from evidence coming in automatically to the bundle an auditor actually opens. Hover or focus a screen to bring it flat. Simulated screens shown for illustration.</p>
+      </div>
+      <div class="shots-row">
+        <!-- 1 Evidence automation -->
+        <article class="shot">
+          <div class="shot-frame" role="img" aria-label="Simulated screenshot of evidence automation showing integrations collecting and hash-sealing evidence in real time">
+            <div class="shot-bar" aria-hidden="true"><span class="d" style="background:#e0655a"></span><span class="d" style="background:#e8b34b"></span><span class="d" style="background:#3fa67a"></span><span class="url">app.quantarra.com/evidence</span></div>
+            <div class="shot-body" aria-hidden="true">
+              <span class="shot-kicker">Evidence automation</span>
+              <span class="shot-title">Live collection feed</span>
+              <div class="shot-line"><span class="dot"></span>AWS — IAM policy<span class="mini-pill ok">Sealed</span></div>
+              <div class="shot-line"><span class="dot"></span>Okta — MFA status<span class="mini-pill ok">Sealed</span></div>
+              <div class="shot-line"><span class="dot"></span>GitHub — Branch rules<span class="mini-pill info">Syncing</span></div>
+              <div><div class="shot-meta"><span>Collected today</span><span>1,284 items</span></div><div class="shot-bar-track" style="margin-top:5px"><i style="width:92%"></i></div></div>
+              <div class="shot-tags"><span>350+ integrations</span><span>Hash-sealed</span></div>
+            </div>
+          </div>
+          <div class="shot-cap"><h3>Evidence automation</h3><p>Integrations collect, hash-seal, and file evidence in real time.</p></div>
+        </article>
+        <!-- 2 AI verification -->
+        <article class="shot">
+          <div class="shot-frame" role="img" aria-label="Simulated screenshot of AI verification checking evidence against requirements with expert review">
+            <div class="shot-bar" aria-hidden="true"><span class="d" style="background:#e0655a"></span><span class="d" style="background:#e8b34b"></span><span class="d" style="background:#3fa67a"></span><span class="url">app.quantarra.com/verify</span></div>
+            <div class="shot-body" aria-hidden="true">
+              <span class="shot-kicker">AI verification</span>
+              <div class="shot-score"><span class="big">98<span>%</span></span><span style="font-size:.7rem;line-height:1.35">Evidence<br/>passing checks</span></div>
+              <div class="shot-line"><span class="dot"></span>Access review — complete<span class="mini-pill ok">Verified</span></div>
+              <div class="shot-line"><span class="dot"></span>Policy attestation<span class="mini-pill warn">Needs review</span></div>
+              <div class="shot-line"><span class="dot"></span>Vendor assessment<span class="mini-pill ok">Verified</span></div>
+              <div class="shot-tags"><span>AI checks</span><span>Expert oversight</span></div>
+            </div>
+          </div>
+          <div class="shot-cap"><h3>AI-driven compliance</h3><p>Evidence checked as it arrives. A human makes the final call.</p></div>
+        </article>
+        <!-- 3 Cross-mapping -->
+        <article class="shot">
+          <div class="shot-frame" role="img" aria-label="Simulated screenshot of framework cross-mapping showing one control reused across SOC 2, ISO 27001, HIPAA and other frameworks">
+            <div class="shot-bar" aria-hidden="true"><span class="d" style="background:#e0655a"></span><span class="d" style="background:#e8b34b"></span><span class="d" style="background:#3fa67a"></span><span class="url">app.quantarra.com/mapping</span></div>
+            <div class="shot-body" aria-hidden="true">
+              <span class="shot-kicker">Cross-mapping</span>
+              <span class="shot-title">MFA enforcement — 1 control</span>
+              <div class="shot-line">SOC 2 <span class="muted">CC6.1</span><span class="mini-pill ok">Mapped</span></div>
+              <div class="shot-line">ISO 27001 <span class="muted">A.5.17</span><span class="mini-pill ok">Mapped</span></div>
+              <div class="shot-line">HIPAA <span class="muted">164.312</span><span class="mini-pill ok">Mapped</span></div>
+              <div class="shot-line">PCI DSS <span class="muted">Req 8</span><span class="mini-pill info">Mapped</span></div>
+              <div class="shot-tags"><span>Map once</span><span>Reuse everywhere</span></div>
+            </div>
+          </div>
+          <div class="shot-cap"><h3>Framework cross-mapping</h3><p>Map a control once, count it toward every framework.</p></div>
+        </article>
+        <!-- 4 Risk & controls -->
+        <article class="shot">
+          <div class="shot-frame" role="img" aria-label="Simulated screenshot of risk and controls mapping linking business risks to the controls that manage them">
+            <div class="shot-bar" aria-hidden="true"><span class="d" style="background:#e0655a"></span><span class="d" style="background:#e8b34b"></span><span class="d" style="background:#3fa67a"></span><span class="url">app.quantarra.com/risks</span></div>
+            <div class="shot-body" aria-hidden="true">
+              <span class="shot-kicker">Risk &amp; controls</span>
+              <span class="shot-title">Coverage at a glance</span>
+              <div><div class="shot-meta"><span>Unauthorized access</span><span>96%</span></div><div class="shot-bar-track" style="margin-top:5px"><i style="width:96%"></i></div></div>
+              <div><div class="shot-meta"><span>Vendor failure</span><span>84%</span></div><div class="shot-bar-track" style="margin-top:5px"><i style="width:84%"></i></div></div>
+              <div><div class="shot-meta"><span>Data loss</span><span>91%</span></div><div class="shot-bar-track" style="margin-top:5px"><i style="width:91%"></i></div></div>
+              <div class="shot-line"><span class="dot"></span>42 risks linked<span class="muted">128 controls</span></div>
+            </div>
+          </div>
+          <div class="shot-cap"><h3>Risk &amp; controls mapping</h3><p>Risks linked to controls, so coverage is visible, not assumed.</p></div>
+        </article>
+        <!-- 5 Auditor portal -->
+        <article class="shot">
+          <div class="shot-frame" role="img" aria-label="Simulated screenshot of the auditor portal with a scoped, read-only export bundle ready to share">
+            <div class="shot-bar" aria-hidden="true"><span class="d" style="background:#e0655a"></span><span class="d" style="background:#e8b34b"></span><span class="d" style="background:#3fa67a"></span><span class="url">portal.quantarra.com/audit</span></div>
+            <div class="shot-body" aria-hidden="true">
+              <span class="shot-kicker">Auditor portal</span>
+              <span class="shot-title">SOC 2 — Export bundle</span>
+              <div class="shot-file"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>Workpapers_Q3.pdf</div>
+              <div class="shot-file"><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg>Evidence_index.xlsx</div>
+              <div class="shot-line"><span class="dot"></span>Read-only access<span class="mini-pill ok">Scoped</span></div>
+              <div class="shot-btn">Export bundle →</div>
+            </div>
+          </div>
+          <div class="shot-cap"><h3>Auditor-ready export</h3><p>Scoped, read-only sharing and one-click work-paper export.</p></div>
+        </article>
+      </div>
+      <p class="shots-note">Simulated product views for this draft. Real platform screenshots will replace them on the live page.</p>
+    </div>
+  </section>
+
+  <!-- DEMO VIDEO — placeholder -->
+  <section class="demo-video-sec" id="demo-video" aria-label="Demo video placeholder">
+    <div class="wrap">
+      <div class="demo-video-placeholder">
+        <span class="demo-video-badge">Placeholder</span>
+        <h2>Demo video</h2>
+        <p>The demo video will go here, behind a registration form. Visitors will register to watch the full platform walkthrough.</p>
+        <div class="demo-video-box" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/></svg>
+          <span>Demo video — to be added</span>
+        </div>
+        <p class="demo-video-note">Placeholder only — no video or registration form yet. This marks the spot so it is not forgotten.</p>
+      </div>
     </div>
   </section>
 
@@ -828,6 +1076,22 @@ footer h4{color:#fff;font-size:.95rem;margin:0 0 14px;font-family:var(--font-bod
     root.setAttribute('data-theme', isDark() ? 'light' : 'dark'); syncToggle();
   });
   syncToggle();
+
+  // Language selector: English is the current language; the menu opens and
+  // closes in place and dismisses on an outside click or Escape.
+  var langToggle=document.getElementById('langToggle'), langMenu=document.getElementById('langMenu');
+  function closeLang(){
+    langMenu.classList.remove('open');
+    langToggle.setAttribute('aria-expanded','false');
+  }
+  langToggle.addEventListener('click', function(e){
+    e.stopPropagation();
+    var open=langMenu.classList.toggle('open');
+    langToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  langMenu.addEventListener('click', function(e){ e.stopPropagation(); closeLang(); });
+  document.addEventListener('click', function(){ closeLang(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeLang(); } });
 
   // Mobile menu
   var navToggle=document.getElementById('navToggle'), menu=document.getElementById('mobileMenu');
